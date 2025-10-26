@@ -8,22 +8,19 @@ package modelo;
  *
  * @author CARG
  */
-public class Medico {
-    private int idMedico;
-    private String nombre;
-    private String especialidad;
+public class Medico extends Usuario{
+    private String matricula;
     
-    public Medico(int idMedico, String nombre, String especialidad){
-        this.idMedico = idMedico;
-        this.nombre = nombre;
-        this.especialidad = especialidad;
+    public Medico(long id, String nombre, String documento, String matricula){
+        super(id, nombre, documento);
+        this.matricula = matricula;
     }
     
-    public int getId(){
-        return idMedico;
+    public long getId(){
+        return id;
     }
-    public void setId(int idMedico){
-        this.idMedico = idMedico;
+    public void setId(long id){
+        this.id = id;
     }
     
     public String getNombre(){
@@ -34,19 +31,19 @@ public class Medico {
         this.nombre = nombre;
     }
     
-    public String getEspecialidad(){
-        return especialidad;
+    public String getmatricula(){
+        return matricula;
     }
     
-    public void setEspecialidad(String especialidad){
-        this.especialidad = especialidad;
+    public void setMatricula(String matricula){
+        this.matricula = matricula;
     }
     
     @Override
     public String toString() {
         return """
                Medico: 
-                "\nMedico:""" + nombre  +
-                "\nEspecialidad:" + especialidad;
+                "\nNombre:""" + nombre  +
+                "\nMatricula:" + matricula;
     }
 }
