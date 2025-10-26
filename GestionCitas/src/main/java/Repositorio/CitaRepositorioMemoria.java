@@ -12,9 +12,9 @@ import modelo.Cita;
 import modelo.Medico;
 import modelo.Paciente;
 
-public class CitaRepositorioMemoria implements ICitaRepositorio{
+public class CitaRepositorioMemoria implements ICitaRepositorio {
 
-     // Usamos un Map para almacenar las citas, con el ID como clave
+    // Usamos un Map para almacenar las citas, con el ID como clave
     private final Map<Long, Cita> citas = new HashMap<>();
     private Long siguienteId = 1L; // Para autoincrementar IDs
 
@@ -23,8 +23,10 @@ public class CitaRepositorioMemoria implements ICitaRepositorio{
         if (cita.getId() == null) {
             cita.setId(generarSiguienteId());
         }
-        // Si la cita ya tiene un paciente asociado en la entidad, la agregamos también a la lista del paciente
-        // Esto simula una relación bidireccional o una forma de mantener la consistencia
+        // Si la cita ya tiene un paciente asociado en la entidad, la agregamos también
+        // a la lista del paciente
+        // Esto simula una relación bidireccional o una forma de mantener la
+        // consistencia
         if (cita.getPaciente() != null) {
             cita.getPaciente().agregarCita(cita);
         }
@@ -59,8 +61,7 @@ public class CitaRepositorioMemoria implements ICitaRepositorio{
     @Override
     public boolean existePorFechaYMedico(LocalDateTime fechaHora, Medico medico) {
         return citas.values().stream()
-                .anyMatch(cita ->
-                        cita.getMedico() != null && cita.getMedico().equals(medico) &&
+                .anyMatch(cita -> cita.getMedico() != null && cita.getMedico().equals(medico) &&
                         cita.getFechaHora() != null && cita.getFechaHora().equals(fechaHora) &&
                         !"CANCELADA".equals(cita.getEstado()) // No consideramos citas canceladas como duplicadas
                 );
