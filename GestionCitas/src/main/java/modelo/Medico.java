@@ -8,45 +8,30 @@ package modelo;
  *
  * @author CARG
  */
-public class Medico {
-    private int idMedico;
-    private String nombre;
-    private String especialidad;
-    
-    public Medico(int idMedico, String nombre, String especialidad){
-        this.idMedico = idMedico;
-        this.nombre = nombre;
+public class Medico extends Usuario {
+    private String matricula;
+    private Especialidad especialidad;
+
+    public Medico(Long id, String nombre, String documento, String matricula, Especialidad especialidad) {
+        super(id, nombre, documento);
+        this.matricula = matricula;
         this.especialidad = especialidad;
     }
-    
-    public int getId(){
-        return idMedico;
+
+    // Getters y setters
+    public String getMatricula() {
+        return matricula;
     }
-    public void setId(int idMedico){
-        this.idMedico = idMedico;
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
     }
-    
-    public String getNombre(){
-    return nombre;
-    }
-    
-    public void setNombre(String nombre){
-        this.nombre = nombre;
-    }
-    
-    public String getEspecialidad(){
+
+    public Especialidad getEspecialidad() {
         return especialidad;
     }
-    
-    public void setEspecialidad(String especialidad){
+
+    public void setEspecialidad(Especialidad especialidad) {
         this.especialidad = especialidad;
-    }
-    
-    @Override
-    public String toString() {
-        return """
-               Medico: 
-                "\nMedico:""" + nombre  +
-                "\nEspecialidad:" + especialidad;
     }
 }

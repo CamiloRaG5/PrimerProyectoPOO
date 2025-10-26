@@ -17,12 +17,14 @@ public class Paciente extends Usuario {
     private String direccion;
     private List<Cita> citas;
 
-    public Paciente(Long id, String nombre, String documento, String telefono, String direccion) {
+    public Paciente(int id, String nombre, String documento, String telefono, String direccion) {
         super(id, nombre, documento);
         this.telefono = telefono;
         this.direccion = direccion;
         this.citas = new ArrayList<>();
     }
+
+    
 
     // Getters y setters
     public String getTelefono() {
