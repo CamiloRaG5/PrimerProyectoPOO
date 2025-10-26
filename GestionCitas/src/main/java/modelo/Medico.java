@@ -9,21 +9,21 @@ package modelo;
  * @author CARG
  */
 public class Medico {
-    private int id;
+    private int idMedico;
     private String nombre;
     private String especialidad;
     
-    public Medico(int id, String nombre, String especialidad){
-        this.id = id;
+    public Medico(int idMedico, String nombre, String especialidad){
+        this.idMedico = idMedico;
         this.nombre = nombre;
         this.especialidad = especialidad;
     }
     
     public int getId(){
-        return id;
+        return idMedico;
     }
-    public void setId(int id){
-        this.id = id;
+    public void setId(int idMedico){
+        this.idMedico = idMedico;
     }
     
     public String getNombre(){

@@ -8,59 +8,25 @@ package modelo;
  *
  * @author CARG
  */
-public class Paciente {
-    private int id;
-    private String nombre;
-    private int edad;
-    private String documento;
+public class Paciente extends Usuario {
+    private String telefono;
+    private String direccion;
     
-    public Paciente(int id, String nombre, int edad, String documento) {
-    this.id = id;
-    this.nombre = nombre;
-    this.edad = edad;
-    this.documento = documento;
-    }
-    
-    public int getId(){
-        return id;
-    }
-    
-    public void setId(int id){
-        this.id = id;
-    }
-    
-    public String getNombre(){
-    return nombre;
-    }
-    
-    public void setNombre(String nombre){
-        this.nombre = nombre;
-    }
-    
-    public int getEdad(){
-        return edad;
-    }
-    
-    public void setEdad(int edad){
-        this.edad = edad;
-    }
-    
-    public String getDocumento(){
-        return documento;
-    }
-    
-    public void setDocumento(String documento){
-        this.documento = documento;
+    public Paciente(long id, String nombre, String documento, String telefono, String direccion){
+        super(id, nombre, documento);
+        this.telefono = telefono;
+        this.direccion = direccion;
     }
     
     @Override
     public String toString() {
         return """
                Paciente: 
-               id:""" + id +
-                "\nnombre:'" + nombre  +
-                "\nedad:" + edad +
-                "\ndocumento:" + documento;
+               Id:""" + id +
+                "\nNombre:'" + nombre  +
+                "\nTelefono:" + telefono +
+                "\nDirección:" + direccion +
+                "\nDocumento:" + documento;
     }
 }
 
