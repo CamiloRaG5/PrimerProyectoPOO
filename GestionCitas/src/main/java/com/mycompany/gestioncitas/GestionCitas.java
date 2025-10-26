@@ -10,7 +10,7 @@ import modelo.Paciente;
  */
 public class GestionCitas {
     public static void main(String[] args) {
-        Paciente p1 = new Paciente(1, "Juan Pérez", 30, "12345678");
+        Paciente p1 = new Paciente(1, "Juan Pérez", "12345678", "123321", "alla");
 
         System.out.println(p1.toString());
     }
