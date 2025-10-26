@@ -4,29 +4,52 @@
  */
 package modelo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author CARG
  */
 public class Paciente extends Usuario {
+
     private String telefono;
     private String direccion;
-    
-    public Paciente(long id, String nombre, String documento, String telefono, String direccion){
+    private List<Cita> citas;
+
+    public Paciente(Long id, String nombre, String documento, String telefono, String direccion) {
         super(id, nombre, documento);
         this.telefono = telefono;
         this.direccion = direccion;
+        this.citas = new ArrayList<>();
     }
-    
-    @Override
-    public String toString() {
-        return """
-               Paciente: 
-               Id:""" + id +
-                "\nNombre:'" + nombre  +
-                "\nTelefono:" + telefono +
-                "\nDirección:" + direccion +
-                "\nDocumento:" + documento;
+
+    // Getters y setters
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public List<Cita> getCitas() {
+        return citas;
+    }
+
+    public void setCitas(List<Cita> citas) {
+        this.citas = citas;
+    }
+
+    public void agregarCita(Cita cita) {
+        this.citas.add(cita);
     }
 }
-
