@@ -9,22 +9,22 @@ package modelo;
  * @author CARG
  */
 public class Usuario {
-    protected long id;
+    protected Long id;
     protected String nombre;
     protected String documento;
 
-    public Usuario(long id, String nombre, String documento) {
+    public Usuario(Long id, String nombre, String documento) {
         this.id = id;
         this.nombre = nombre;
         this.documento = documento;
     }
 
     // Getters y setters agregados
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
