@@ -2,6 +2,7 @@ package ui.medicos;
 
 import javax.swing.*;
 
+import com.mycompany.gestioncitas.Servicio.EspecialidadService;
 import com.mycompany.gestioncitas.Servicio.MedicoService;
 import com.mycompany.gestioncitas.Servicio.Validator.ValidationException;
 
@@ -20,8 +21,7 @@ public class MedicoFormPanel extends JPanel {
 
     // Componentes de la UI
     private JTextField nombreField;
-    private JTextField apellidoField;
-    private JTextField dniField;
+    private JTextField documentoField;
     private JTextField matriculaField;
     private JComboBox<Especialidad> especialidadComboBox; // ComboBox para seleccionar especialidad
     private JButton registrarButton;
@@ -39,12 +39,9 @@ public class MedicoFormPanel extends JPanel {
         // Crear campos y etiquetas
         JLabel nombreLabel = new JLabel("Nombre:");
         nombreField = new JTextField(20);
-
-        JLabel apellidoLabel = new JLabel("Apellido:");
-        apellidoField = new JTextField(20);
-
-        JLabel dniLabel = new JLabel("DNI:");
-        dniField = new JTextField(10);
+        
+        JLabel documentoLabel = new JLabel("Documento:");
+        documentoField = new JTextField(10);
 
         JLabel matriculaLabel = new JLabel("Matrícula:");
         matriculaField = new JTextField(15);
@@ -62,27 +59,22 @@ public class MedicoFormPanel extends JPanel {
         gbc.insets = new Insets(5, 5, 5, 5); // Espaciado
         gbc.fill = GridBagConstraints.HORIZONTAL; // Rellenar horizontalmente
 
-        // Fila 0: Nombre
+        //Filas
         gbc.gridx = 0; gbc.gridy = 0; add(new JLabel("Nombre:"), gbc);
         gbc.gridx = 1; gbc.gridy = 0; gbc.gridwidth = 2; add(nombreField, gbc);
 
-        // Fila 1: Apellido
-        gbc.gridx = 0; gbc.gridy = 1; gbc.gridwidth = 1; add(new JLabel("Apellido:"), gbc);
-        gbc.gridx = 1; gbc.gridy = 1; gbc.gridwidth = 2; add(apellidoField, gbc);
 
-        // Fila 2: DNI
         gbc.gridx = 0; gbc.gridy = 2; gbc.gridwidth = 1; add(new JLabel("DNI:"), gbc);
-        gbc.gridx = 1; gbc.gridy = 2; gbc.gridwidth = 2; add(dniField, gbc);
+        gbc.gridx = 1; gbc.gridy = 2; gbc.gridwidth = 2; add(documentoField, gbc);
 
-        // Fila 3: Matrícula
         gbc.gridx = 0; gbc.gridy = 3; gbc.gridwidth = 1; add(new JLabel("Matrícula:"), gbc);
         gbc.gridx = 1; gbc.gridy = 3; gbc.gridwidth = 2; add(matriculaField, gbc);
 
-        // Fila 4: Especialidad
-        gbc.gridx = 0; gbc.gridy = 4; gbc.gridwidth = 1; add(especialidadLabel, gbc);
+        
+        gbc.gridx = 0; gbc.gridy = 4; gbc.gridwidth = 1; add(especialidadComboBox, gbc);
         gbc.gridx = 1; gbc.gridy = 4; gbc.gridwidth = 2; add(especialidadComboBox, gbc);
 
-        // Fila 5: Botón Registrar
+        //Botón Registrar
         gbc.gridx = 1; gbc.gridy = 5; gbc.gridwidth = 2; gbc.anchor = GridBagConstraints.EAST;
         add(registrarButton, gbc);
 
@@ -115,29 +107,28 @@ public class MedicoFormPanel extends JPanel {
     private void registrarMedico() {
         // 1. Obtener los datos de los campos
         String nombre = nombreField.getText().trim();
-        String apellido = apellidoField.getText().trim();
-        String dni = dniField.getText().trim();
+        String documento = documentoField.getText().trim();
         String matricula = matriculaField.getText().trim();
         Especialidad especialidadSeleccionada = (Especialidad) especialidadComboBox.getSelectedItem();
 
         // 2. Validar campos básicos
-        if (nombre.isEmpty() || apellido.isEmpty() || dni.isEmpty() || matricula.isEmpty() || especialidadSeleccionada == null) {
+        if (nombre.isEmpty() || documento.isEmpty() || matricula.isEmpty() || especialidadSeleccionada == null) {
             JOptionPane.showMessageDialog(this,
                     "Todos los campos son obligatorios.",
                     "Error de Validación",
-                    JOptionPane.MESSAGE_ERROR);
+                    JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         // 3. Crear el objeto Medico
         // El ID se asignará automáticamente en el service/repository
-        Medico nuevoMedico = new Medico(null, nombre, apellido, dni, especialidadSeleccionada);
+        Medico nuevoMedico = new Medico(null, nombre, documento, matricula, especialidadSeleccionada);
 
         // 4. Intentar registrar el médico a través del servicio
         try {
             medicoService.registrarMedico(nuevoMedico); // Asumiendo que este método existe en MedicoService
             JOptionPane.showMessageDialog(this,
-                    "Médico '" + nombre + " " + apellido + "' registrado exitosamente.",
+                    "Médico '" + nombre + "' registrado exitosamente.",
                     "Registro Exitoso",
                     JOptionPane.INFORMATION_MESSAGE);
             limpiarCampos();
@@ -157,8 +148,7 @@ public class MedicoFormPanel extends JPanel {
 
     private void limpiarCampos() {
         nombreField.setText("");
-        apellidoField.setText("");
-        dniField.setText("");
+        documentoField.setText("");
         matriculaField.setText("");
         especialidadComboBox.setSelectedIndex(0); // Seleccionar la primera especialidad por defecto
         nombreField.requestFocus();
