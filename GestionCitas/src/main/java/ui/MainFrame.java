@@ -6,6 +6,7 @@ import com.mycompany.gestioncitas.Servicio.EspecialidadService;
 import com.mycompany.gestioncitas.Servicio.MedicoService;
 import com.mycompany.gestioncitas.Servicio.PacienteService;
 
+import ui.citas.AgendarCitaPanel;
 import ui.medicos.MedicoFormPanel;
 import ui.medicos.MedicoListPanel;
 import ui.pacientes.PacienteFormPanel;
@@ -21,6 +22,7 @@ public class MainFrame extends JFrame {
     private MedicoFormPanel medicoFormPanel;
     private MedicoListPanel medicoListPanel;
     private EspecialidadService especialidadService;
+    private AgendarCitaPanel agendarCitaPanel;
 
     // Panel principal donde se mostrará el contenido de cada sección
     private JPanel contentPanel;
@@ -59,6 +61,7 @@ public class MainFrame extends JFrame {
         pacienteListPanel = new PacienteListPanel(pacienteService);
         medicoFormPanel = new MedicoFormPanel(medicoService, especialidadService);
         medicoListPanel = new MedicoListPanel(medicoService);
+        agendarCitaPanel = new AgendarCitaPanel(pacienteService, medicoService, citaService);
 
         // Items de menú para Pacientes
         JMenuItem registrarPacienteItem = new JMenuItem("Registrar Paciente");
@@ -119,8 +122,7 @@ public class MainFrame extends JFrame {
         JMenuItem agendarCitaItem = citasMenu.getItem(0); // "Agendar Cita"
         JMenuItem verAgendaItem = citasMenu.getItem(1); // "Ver Agenda"
         JMenuItem completarCitaItem = citasMenu.getItem(2); // "Completar Cita"
-
-        agendarCitaItem.addActionListener(e -> showPanel(new JPanel())); // TODO: Crear AgendarCitaPanel
+        agendarCitaItem.addActionListener(e -> showPanel(agendarCitaPanel));
         verAgendaItem.addActionListener(e -> showPanel(new JPanel())); // TODO: Crear AgendaPanel
         completarCitaItem.addActionListener(e -> showPanel(new JPanel())); // TODO: Crear CompletarCitaPanel
 

@@ -40,4 +40,9 @@ public class Usuario {
     public void setDocumento(String documento) {
         this.documento = documento;
     }
+
+    @Override
+    public String toString() {
+        return getNombre().trim() + (documento != null ? " (Documento: " + documento + ")" : "");
+    }
 }

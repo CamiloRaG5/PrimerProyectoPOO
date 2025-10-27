@@ -49,4 +49,9 @@ public class Paciente extends Usuario {
     public void agregarCita(Cita cita) {
         this.citas.add(cita);
     }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }
