@@ -25,7 +25,7 @@ public class MedicoListPanel extends JPanel {
         this.medicoService = medicoService;
         initComponents();
         layoutComponents();
-        cargarDatosTabla(); // Cargar datos al inicializar
+        cargarDatosTabla(); 
     }
 
     private void initComponents() {
@@ -52,9 +52,10 @@ public class MedicoListPanel extends JPanel {
      * Carga los datos de los médicos desde el servicio y los actualiza en la tabla.
      */
     public void cargarDatosTabla() {
-        tableModel.setRowCount(0); // Limpiar tabla
+        // Limpiar tabla
+        tableModel.setRowCount(0); 
 
-        List<Medico> medicos = medicoService.obtenerTodos(); // Asumiendo que existe este método
+        List<Medico> medicos = medicoService.obtenerTodos(); 
 
         for (Medico medico : medicos) {
             Especialidad especialidad = medico.getEspecialidad();
@@ -65,15 +66,15 @@ public class MedicoListPanel extends JPanel {
                     medico.getNombre(),
                     medico.getDocumento(),
                     medico.getMatricula(),
-                    nombreEspecialidad // Mostrar el nombre de la especialidad
+
+                    // Mostrar el nombre de la especialidad
+                    nombreEspecialidad 
             };
             tableModel.addRow(rowData);
         }
     }
 
-    /**
-     * Método para refrescar los datos manualmente.
-     */
+    //refrescar datos
     public void refrescarTabla() {
         cargarDatosTabla();
     }

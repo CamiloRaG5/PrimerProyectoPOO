@@ -18,7 +18,7 @@ public class PacienteListPanel extends JPanel {
     private DefaultTableModel tableModel;
     private JScrollPane scrollPane;
 
-    // Columnas que mostraremos en la tabla
+    // columnas que mostraremos en la tabla
     private static final String[] COLUMNAS = { "ID", "Nombre", "Documento", "Teléfono", "Dirección" };
 
     public PacienteListPanel(PacienteService pacienteService) {
@@ -43,7 +43,7 @@ public class PacienteListPanel extends JPanel {
 
         // mantener formato en tabla
         pacienteTable.getTableHeader().setReorderingAllowed(false);
-        pacienteTable.setRowHeight(25); // Ajustar altura de fila
+        pacienteTable.setRowHeight(25);
 
         // creamos el JScrollPane para que la tabla sea scrollable si hay muchos datos
         scrollPane = new JScrollPane(pacienteTable);
@@ -59,7 +59,7 @@ public class PacienteListPanel extends JPanel {
      * tabla.
      */
     public void cargarDatosTabla() {
-        // Limpiar el modelo de tabla antes de cargar nuevos datos
+        // Limpiar el modelo de tabla
         tableModel.setRowCount(0);
 
         // Obtener la lista de pacientes desde el servicio
