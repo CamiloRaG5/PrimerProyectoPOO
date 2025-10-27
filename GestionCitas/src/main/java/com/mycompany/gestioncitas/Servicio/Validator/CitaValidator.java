@@ -16,12 +16,12 @@ public class CitaValidator implements IValidator<Cita> {
 
     @Override
     public void validar(Cita cita) throws ValidationException {
-        // Regla 1: La cita no puede ser nula
+
+        // reglas para validar citas
         if (cita == null) {
             throw new ValidationException("La cita no puede ser nula.");
         }
 
-        // Regla 2: Paciente y Médico no pueden ser nulos
         if (cita.getPaciente() == null) {
             throw new ValidationException("La cita debe tener un paciente asociado.");
         }
@@ -29,7 +29,6 @@ public class CitaValidator implements IValidator<Cita> {
             throw new ValidationException("La cita debe tener un médico asociado.");
         }
 
-        // Regla 3: La fecha y hora no pueden ser nulas y deben estar en el futuro
         if (cita.getFechaHora() == null) {
             throw new ValidationException("La fecha y hora de la cita son obligatorias.");
         }
@@ -37,8 +36,6 @@ public class CitaValidator implements IValidator<Cita> {
             throw new ValidationException("No se pueden agendar citas en el pasado.");
         }
 
-        // Regla 4: Verificar que no haya una cita duplicada para el mismo médico a la
-        // misma hora
         if (repositorio.existePorFechaYMedico(cita.getFechaHora(), cita.getMedico())) {
             throw new ValidationException(
                     "El médico " + cita.getMedico().getNombre() +

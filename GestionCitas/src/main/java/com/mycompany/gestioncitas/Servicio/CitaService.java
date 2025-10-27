@@ -13,21 +13,15 @@ import modelo.Paciente;
 public class CitaService {
 
     private final ICitaRepositorio repositorio;
-    // Composición de un validador (aplicamos SRP: la validación vive fuera)
+    
     private final CitaValidator validator;
 
     public CitaService(ICitaRepositorio repositorio) {
         this.repositorio = repositorio;
-        this.validator = new CitaValidator(repositorio); // <-- LÍNEA CLAVE
+        this.validator = new CitaValidator(repositorio);
     }
 
-    // --------------------- API pública ---------------------
-
-    /**
-     * Agenda una nueva cita.
-     * 
-     * @throws ValidationException si hay reglas de negocio incumplidas
-     */
+    
     public void agendarCita(Cita cita) throws ValidationException {
         validator.validar(cita);
         cita.setEstado("PROGRAMADA");
@@ -35,7 +29,7 @@ public class CitaService {
     }
 
     /**
-     * Marca una cita como completada y registra diagnóstico + tratamiento.
+     * Marca una cita como completada y registra diagnóstico y tratamiento.
      */
     public void completarCita(Long citaId, String diagnostico, String tratamiento)
             throws ValidationException {
@@ -50,12 +44,10 @@ public class CitaService {
         cita.setEstado("COMPLETADA");
         cita.setDiagnostico(diagnostico);
         cita.setTratamiento(tratamiento);
-        repositorio.guardar(cita); // persistimos la modificación
+        repositorio.guardar(cita);
     }
 
-    /**
-     * Cancela una cita (lógica simple, sin borrado físico).
-     */
+    
     public void cancelarCita(Long citaId) throws ValidationException {
         Cita cita = repositorio.buscarPorId(citaId)
                 .orElseThrow(() -> new ValidationException("La cita no existe"));
@@ -63,7 +55,7 @@ public class CitaService {
         repositorio.guardar(cita);
     }
 
-    // --- Consultas de apoyo a la UI ---
+    //Consultas de apoyo a la UI
 
     public List<Cita> obtenerCitasPorPaciente(Paciente paciente) {
         return repositorio.buscarPorPaciente(paciente);
