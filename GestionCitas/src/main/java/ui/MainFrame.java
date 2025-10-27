@@ -6,6 +6,7 @@ import com.mycompany.gestioncitas.Servicio.MedicoService;
 import com.mycompany.gestioncitas.Servicio.PacienteService;
 
 import ui.pacientes.PacienteFormPanel;
+import ui.pacientes.PacienteListPanel;
 
 import java.awt.*;
 
@@ -18,8 +19,8 @@ public class MainFrame extends JFrame {
 
     // Panel principal donde se mostrará el contenido de cada sección
     private JPanel contentPanel;
-
     private PacienteFormPanel pacienteFormPanel;
+    private PacienteListPanel pacienteListPanel;
 
     // Menús
     private JMenuBar menuBar;
@@ -48,6 +49,7 @@ public class MainFrame extends JFrame {
         ayudaMenu = new JMenu("Ayuda");
 
         pacienteFormPanel = new PacienteFormPanel(pacienteService);
+        pacienteListPanel = new PacienteListPanel(pacienteService);
 
         // Items de menú para Pacientes
         JMenuItem registrarPacienteItem = new JMenuItem("Registrar Paciente");
@@ -94,7 +96,7 @@ public class MainFrame extends JFrame {
         JMenuItem registrarPacienteItem = pacientesMenu.getItem(0);
         JMenuItem listarPacientesItem = pacientesMenu.getItem(1);
         registrarPacienteItem.addActionListener(e -> showPanel(pacienteFormPanel));
-        listarPacientesItem.addActionListener(e -> showPanel(new JPanel()));
+        listarPacientesItem.addActionListener(e -> showPanel(pacienteListPanel));
 
         pacientesMenu.getItem(1).addActionListener(e -> showPanel(new JPanel()));
 
