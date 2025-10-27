@@ -2,20 +2,27 @@ package ui;
 
 import javax.swing.*;
 import com.mycompany.gestioncitas.Servicio.CitaService;
+import com.mycompany.gestioncitas.Servicio.EspecialidadService;
 import com.mycompany.gestioncitas.Servicio.MedicoService;
 import com.mycompany.gestioncitas.Servicio.PacienteService;
 
+import ui.citas.AgendarCitaPanel;
+import ui.medicos.MedicoFormPanel;
+import ui.medicos.MedicoListPanel;
 import ui.pacientes.PacienteFormPanel;
 import ui.pacientes.PacienteListPanel;
 
 import java.awt.*;
-
 
 public class MainFrame extends JFrame {
 
     private final PacienteService pacienteService;
     private final MedicoService medicoService;
     private final CitaService citaService;
+    private MedicoFormPanel medicoFormPanel;
+    private MedicoListPanel medicoListPanel;
+    private EspecialidadService especialidadService;
+    private AgendarCitaPanel agendarCitaPanel;
 
     // Panel principal donde se mostrará el contenido de cada sección
     private JPanel contentPanel;
@@ -29,10 +36,12 @@ public class MainFrame extends JFrame {
     private JMenu citasMenu;
     private JMenu ayudaMenu;
 
-    public MainFrame(PacienteService pacienteService, MedicoService medicoService, CitaService citaService) {
+    public MainFrame(PacienteService pacienteService, MedicoService medicoService, CitaService citaService,
+            EspecialidadService especialidadService) {
         this.pacienteService = pacienteService;
         this.medicoService = medicoService;
         this.citaService = citaService;
+        this.especialidadService = especialidadService;
 
         initComponents();
         layoutComponents();
@@ -48,8 +57,11 @@ public class MainFrame extends JFrame {
         citasMenu = new JMenu("Citas");
         ayudaMenu = new JMenu("Ayuda");
 
-        pacienteFormPanel = new PacienteFormPanel(pacienteService);
+        /*pacienteFormPanel = new PacienteFormPanel(pacienteService);
         pacienteListPanel = new PacienteListPanel(pacienteService);
+        medicoFormPanel = new MedicoFormPanel(medicoService, especialidadService);
+        medicoListPanel = new MedicoListPanel(medicoService);
+        agendarCitaPanel = new AgendarCitaPanel(pacienteService, medicoService, citaService);*/
 
         // Items de menú para Pacientes
         JMenuItem registrarPacienteItem = new JMenuItem("Registrar Paciente");
@@ -81,6 +93,7 @@ public class MainFrame extends JFrame {
         menuBar.add(citasMenu);
         menuBar.add(ayudaMenu);
 
+        
         // Panel de contenido principal
         contentPanel = new JPanel(new CardLayout());
     }
@@ -100,22 +113,23 @@ public class MainFrame extends JFrame {
 
         pacientesMenu.getItem(1).addActionListener(e -> showPanel(new JPanel()));
 
-        // Listeners para Médicos
-        medicosMenu.getItem(0).addActionListener(e -> showPanel(new JPanel()));
-        medicosMenu.getItem(1).addActionListener(e -> showPanel(new JPanel()));
+        // --- Listeners para Médicos ---
+        JMenuItem registrarMedicoItem = medicosMenu.getItem(0); // "Registrar Médico"
+        JMenuItem listarMedicosItem = medicosMenu.getItem(1); // "Listar Médicos"
+        registrarMedicoItem.addActionListener(e -> showPanel(medicoFormPanel)); // Mostrar panel de registro de médico
+        listarMedicosItem.addActionListener(e -> showPanel(medicoListPanel)); // Mostrar panel de lista de médicos
 
         // Listeners para Citas
         JMenuItem agendarCitaItem = citasMenu.getItem(0); // "Agendar Cita"
         JMenuItem verAgendaItem = citasMenu.getItem(1); // "Ver Agenda"
         JMenuItem completarCitaItem = citasMenu.getItem(2); // "Completar Cita"
-
-        agendarCitaItem.addActionListener(e -> showPanel(new JPanel())); // TODO: Crear AgendarCitaPanel
+        agendarCitaItem.addActionListener(e -> showPanel(agendarCitaPanel));
         verAgendaItem.addActionListener(e -> showPanel(new JPanel())); // TODO: Crear AgendaPanel
         completarCitaItem.addActionListener(e -> showPanel(new JPanel())); // TODO: Crear CompletarCitaPanel
 
         // Listener para Ayuda
         ayudaMenu.getItem(0).addActionListener(e -> showMessageDialog(
-                "Sistema de Gestión Clínica v1.0\nDesarrollado para Técnicas de Programación y Laboratorio"));
+                "Sistema de Gestión Clínica"));
     }
 
     // muestra unn nuevo panel
@@ -130,6 +144,6 @@ public class MainFrame extends JFrame {
 
     private void showMessageDialog(String message) {
         JOptionPane.showMessageDialog(this, message, "Acerca de", JOptionPane.INFORMATION_MESSAGE);
-    }  
+    }
 
 }

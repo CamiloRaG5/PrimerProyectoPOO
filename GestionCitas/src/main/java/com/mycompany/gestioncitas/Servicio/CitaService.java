@@ -13,7 +13,7 @@ import modelo.Paciente;
 public class CitaService {
 
     private final ICitaRepositorio repositorio;
-    
+
     private final CitaValidator validator;
 
     public CitaService(ICitaRepositorio repositorio) {
@@ -21,7 +21,6 @@ public class CitaService {
         this.validator = new CitaValidator(repositorio);
     }
 
-    
     public void agendarCita(Cita cita) throws ValidationException {
         validator.validar(cita);
         cita.setEstado("PROGRAMADA");
@@ -47,7 +46,6 @@ public class CitaService {
         repositorio.guardar(cita);
     }
 
-    
     public void cancelarCita(Long citaId) throws ValidationException {
         Cita cita = repositorio.buscarPorId(citaId)
                 .orElseThrow(() -> new ValidationException("La cita no existe"));
@@ -55,7 +53,12 @@ public class CitaService {
         repositorio.guardar(cita);
     }
 
-    //Consultas de apoyo a la UI
+    //obtener citas
+    public List<Cita> obtenerTodasCitas() {
+        return repositorio.buscarTodos();
+    }
+
+    // Consultas de apoyo a la UI
 
     public List<Cita> obtenerCitasPorPaciente(Paciente paciente) {
         return repositorio.buscarPorPaciente(paciente);
@@ -70,5 +73,4 @@ public class CitaService {
                 .filter(c -> "COMPLETADA".equals(c.getEstado()))
                 .toList();
     }
-
 }

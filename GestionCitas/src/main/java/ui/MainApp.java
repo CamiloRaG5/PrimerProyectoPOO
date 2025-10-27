@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 import com.mycompany.gestioncitas.Servicio.CitaService;
+import com.mycompany.gestioncitas.Servicio.EspecialidadService;
 import com.mycompany.gestioncitas.Servicio.MedicoService;
 import com.mycompany.gestioncitas.Servicio.PacienteService;
 
@@ -22,14 +23,15 @@ public class MainApp {
         //estos usan listas internas
         PacienteService pacienteService = new PacienteService();
         MedicoService medicoService = new MedicoService();
+        EspecialidadService especialidadService = new EspecialidadService();
 
         // configurar y mostrar la ventana principal
         SwingUtilities.invokeLater(() -> {
-            MainFrame frame = new MainFrame(pacienteService, medicoService, citaService);
+            MainFrame frame = new MainFrame(pacienteService, medicoService, citaService,especialidadService);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setTitle("Sistema de Gestión Clínica");
             frame.setSize(800, 600);
-            frame.setLocationRelativeTo(null); // Centrar la ventana
+            frame.setLocationRelativeTo(null); 
             frame.setVisible(true);
         });
     }
