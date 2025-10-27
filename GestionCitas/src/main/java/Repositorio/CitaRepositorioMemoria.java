@@ -16,17 +16,14 @@ public class CitaRepositorioMemoria implements ICitaRepositorio {
 
     // Usamos un Map para almacenar las citas, con el ID como clave
     private final Map<Long, Cita> citas = new HashMap<>();
-    private Long siguienteId = 1L; // Para autoincrementar IDs
+    private Long siguienteId = 1L; // autoincrementar ID
 
     @Override
     public void guardar(Cita cita) {
         if (cita.getId() == null) {
             cita.setId(generarSiguienteId());
         }
-        // Si la cita ya tiene un paciente asociado en la entidad, la agregamos también
-        // a la lista del paciente
-        // Esto simula una relación bidireccional o una forma de mantener la
-        // consistencia
+
         if (cita.getPaciente() != null) {
             cita.getPaciente().agregarCita(cita);
         }
@@ -40,7 +37,7 @@ public class CitaRepositorioMemoria implements ICitaRepositorio {
 
     @Override
     public List<Cita> buscarTodos() {
-        // Devolvemos una nueva lista para evitar modificaciones externas directas
+        // devuelve una nueva lista para evitar modificaciones externas directas
         return new ArrayList<>(citas.values());
     }
 
@@ -67,7 +64,7 @@ public class CitaRepositorioMemoria implements ICitaRepositorio {
                 );
     }
 
-    // Método auxiliar para generar IDs únicos
+    // auxiliar para generar IDs únicos
     private synchronized Long generarSiguienteId() {
         return siguienteId++;
     }
