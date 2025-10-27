@@ -57,11 +57,11 @@ public class MainFrame extends JFrame {
         citasMenu = new JMenu("Citas");
         ayudaMenu = new JMenu("Ayuda");
 
-        pacienteFormPanel = new PacienteFormPanel(pacienteService);
+        /*pacienteFormPanel = new PacienteFormPanel(pacienteService);
         pacienteListPanel = new PacienteListPanel(pacienteService);
         medicoFormPanel = new MedicoFormPanel(medicoService, especialidadService);
         medicoListPanel = new MedicoListPanel(medicoService);
-        agendarCitaPanel = new AgendarCitaPanel(pacienteService, medicoService, citaService);
+        agendarCitaPanel = new AgendarCitaPanel(pacienteService, medicoService, citaService);*/
 
         // Items de menú para Pacientes
         JMenuItem registrarPacienteItem = new JMenuItem("Registrar Paciente");
@@ -93,6 +93,7 @@ public class MainFrame extends JFrame {
         menuBar.add(citasMenu);
         menuBar.add(ayudaMenu);
 
+        
         // Panel de contenido principal
         contentPanel = new JPanel(new CardLayout());
     }

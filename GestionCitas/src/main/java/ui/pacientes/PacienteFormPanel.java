@@ -29,6 +29,8 @@ public class PacienteFormPanel extends JPanel {
         addListeners();
     }
 
+    
+
     private void initComponents() {
         // Crear campos y etiquetas
         JLabel nombreLabel = new JLabel("Nombre:");

@@ -89,7 +89,7 @@ public class AgendarCitaPanel extends JPanel {
         gbc.anchor = GridBagConstraints.EAST;
         add(agendarButton, gbc);
 
-        // espacio flexible
+        
         gbc.gridx = 0;
         gbc.gridy = 4;
         gbc.weighty = 1.0;
